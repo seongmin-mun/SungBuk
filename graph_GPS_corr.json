@@ -1,0 +1,437 @@
+{
+    "nodes": [
+        {
+            "name": "심우장",
+            "id": 0,
+            "Latitude":37.593502,
+            "Longitude":126.991603
+        },
+        {
+            "name": "최순우",
+            "id": 1,
+            "Latitude":37.593071,
+            "Longitude":127.000417
+        },
+        {
+            "name": "이종석",
+            "id": 2,
+            "Latitude":37.594027,
+            "Longitude":126.994521
+        },
+        {
+            "name": "수연산방",
+            "id": 3,
+            "Latitude":37.59487,
+            "Longitude":126.994710
+        },
+        {
+            "name": "한용운",
+            "id": 4,
+            "Latitude":37.593500,
+            "Longitude":126.991601
+        },
+        {
+            "name": "길상사",
+            "id": 5,
+            "Latitude":37.598644,
+            "Longitude":126.993941
+        },
+        {
+            "name": "김일엽",
+            "id": 6,
+            "Latitude":37.59483,
+            "Longitude":126.990565
+        },
+        {
+            "name": "이태준",
+            "id": 7,
+            "Latitude":37.59489,
+            "Longitude":126.994712
+        },
+        {
+            "name": "조지훈",
+            "id": 8,
+            "Latitude":37.593879,
+            "Longitude":127.000266
+        },
+        {
+            "name": "김환기",
+            "id": 9,
+            "Latitude":37.594619,
+            "Longitude":126.991676
+        },
+        {
+            "name": "김용준",
+            "id": 10,
+            "Latitude":37.594621,
+            "Longitude":126.991678
+        },
+        {
+            "name": "박태원",
+            "id": 11,
+            "Latitude":37.594597,
+            "Longitude":126.992931
+        },
+        {
+            "name": "윤이상",
+            "id": 12,
+            "Latitude":37.593245,
+            "Longitude":127.000615
+        },
+        {
+            "name": "김기창",
+            "id": 13,
+            "Latitude":37.594598,
+            "Longitude":126.999832
+        },
+        {
+            "name": "임종국",
+            "id": 14,
+            "Latitude":37.593369,
+            "Longitude":127.000823
+        },
+        {
+            "name": "김광섭",
+            "id": 15,
+            "Latitude":37.591806,
+            "Longitude":127.003301
+        }
+    ],
+    "links": [
+        {
+            "source":0,
+            "target":4,
+            "type": "high"
+        },
+        {
+            "source":4,
+            "target":0,
+            "type": "high"
+        },
+        {
+            "source":9,
+            "target":10,
+            "type": "high"
+        },
+        {
+            "source":10,
+            "target":9,
+            "type": "high"
+        },
+        {
+            "source":14,
+            "target":6,
+            "type": "high"
+        },
+        {
+            "source":6,
+            "target":14,
+            "type": "high"
+        },
+        {
+            "source":2,
+            "target":3,
+            "type": "high"
+        },
+        {
+            "source":2,
+            "target": 5,
+            "type": "high"
+        },
+        {
+            "source": 2,
+            "target": 6,
+            "type": "high"
+        },
+        {
+            "source": 2,
+            "target": 8,
+            "type": "high"
+        },
+        {
+            "source": 2,
+            "target": 11,
+            "type": "high"
+        },
+        {
+            "source": 2,
+            "target": 12,
+            "type": "high"
+        },
+        {
+            "source": 2,
+            "target": 13,
+            "type": "high"
+        },
+        {
+            "source": 2,
+            "target": 15,
+            "type": "high"
+        },
+        {
+            "source":5,
+            "target": 2,
+            "type": "high"
+        },
+        {
+            "source": 5,
+            "target": 6,
+            "type": "high"
+        },
+        {
+            "source": 5,
+            "target": 8,
+            "type": "high"
+        },
+        {
+            "source": 5,
+            "target": 11,
+            "type": "high"
+        },
+        {
+            "source": 5,
+            "target": 12,
+            "type": "high"
+        },
+        {
+            "source": 5,
+            "target": 13,
+            "type": "high"
+        },
+        {
+            "source": 5,
+            "target": 15,
+            "type": "high"
+        },
+        {
+            "source":6,
+            "target": 2,
+            "type": "high"
+        },
+        {
+            "source": 6,
+            "target": 5,
+            "type": "high"
+        },
+        {
+            "source": 6,
+            "target": 8,
+            "type": "high"
+        },
+        {
+            "source": 6,
+            "target": 11,
+            "type": "high"
+        },
+        {
+            "source": 6,
+            "target": 12,
+            "type": "high"
+        },
+        {
+            "source": 6,
+            "target": 13,
+            "type": "high"
+        },
+        {
+            "source": 6,
+            "target": 15,
+            "type": "high"
+        },
+        {
+            "source":8,
+            "target": 2,
+            "type": "high"
+        },
+        {
+            "source": 8,
+            "target": 5,
+            "type": "high"
+        },
+        {
+            "source": 8,
+            "target": 6,
+            "type": "high"
+        },
+        {
+            "source": 8,
+            "target": 11,
+            "type": "high"
+        },
+        {
+            "source": 8,
+            "target": 12,
+            "type": "high"
+        },
+        {
+            "source": 8,
+            "target": 13,
+            "type": "high"
+        },
+        {
+            "source": 8,
+            "target": 15,
+            "type": "high"
+        },
+        {
+            "source":11,
+            "target": 2,
+            "type": "high"
+        },
+        {
+            "source": 11,
+            "target": 5,
+            "type": "high"
+        },
+        {
+            "source": 11,
+            "target": 6,
+            "type": "high"
+        },
+        {
+            "source": 11,
+            "target": 8,
+            "type": "high"
+        },
+        {
+            "source": 11,
+            "target": 12,
+            "type": "high"
+        },
+        {
+            "source": 11,
+            "target": 13,
+            "type": "high"
+        },
+        {
+            "source": 11,
+            "target": 15,
+            "type": "high"
+        },
+        {
+            "source":12,
+            "target": 2,
+            "type": "high"
+        },
+        {
+            "source": 12,
+            "target": 5,
+            "type": "high"
+        },
+        {
+            "source": 12,
+            "target": 6,
+            "type": "high"
+        },
+        {
+            "source": 12,
+            "target": 8,
+            "type": "high"
+        },
+        {
+            "source": 12,
+            "target": 11,
+            "type": "high"
+        },
+        {
+            "source": 12,
+            "target": 13,
+            "type": "high"
+        },
+        {
+            "source": 12,
+            "target": 15,
+            "type": "high"
+        },
+        {
+            "source":13,
+            "target": 2,
+            "type": "high"
+        },
+        {
+            "source": 13,
+            "target": 5,
+            "type": "high"
+        },
+        {
+            "source": 13,
+            "target": 6,
+            "type": "high"
+        },
+        {
+            "source": 13,
+            "target": 8,
+            "type": "high"
+        },
+        {
+            "source": 13,
+            "target": 11,
+            "type": "high"
+        },
+        {
+            "source": 13,
+            "target": 12,
+            "type": "high"
+        },
+        {
+            "source": 13,
+            "target": 15,
+            "type": "high"
+        },
+        {
+            "source":15,
+            "target": 2,
+            "type": "high"
+        },
+        {
+            "source": 15,
+            "target": 5,
+            "type": "high"
+        },
+        {
+            "source": 15,
+            "target": 6,
+            "type": "high"
+        },
+        {
+            "source": 15,
+            "target": 8,
+            "type": "high"
+        },
+        {
+            "source": 15,
+            "target": 11,
+            "type": "high"
+        },
+        {
+            "source": 15,
+            "target": 12,
+            "type": "high"
+        },
+        {
+            "source": 15,
+            "target": 13,
+            "type": "high"
+        },
+        {
+            "source": 1,
+            "target": 0,
+            "type": "high"
+        },
+        {
+            "source": 0,
+            "target": 8,
+            "type": "high"
+        },
+        {
+            "source": 10,
+            "target": 11,
+            "type": "high"
+        },
+        {
+            "source": 7,
+            "target": 11,
+            "type": "high"
+        }
+    ]
+}

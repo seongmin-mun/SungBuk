@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link href="images/Logo.png" rel="shortcut icon">
+  <title>성북구시각화</title>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="javascripts/d3.v3.min.js" charset="utf-8"></script>
+  <script src="javascripts/d3.v3.js" charset="utf-8"></script>
+  <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=cg0wo5jmtp"></script>
+
+  
+</head>
+<body>
+        <script src='http://d3js.org/d3.v4.js'></script>
+        <script src="http://labratrevenge.com/d3-tip/javascripts/d3.tip.v0.6.3.js"></script>
+            <style type="text/css">
+
+            #header {
+                position:relative;
+                float:left;
+                width:95vw;
+                height:10vw;
+                padding: 0.5%;
+                background-clip: content-box;
+                vertical-align: center;
+                background-color: white;
+            }
+
+            #section_up {
+                position:relative;
+                float:left;
+                width:95vw;
+                height:70vw;
+                padding: 0.5%;
+                background-clip: content-box;
+                vertical-align: center;
+                background-color: #f7d5d3;
+            }
+
+            #section_middle {
+                position:relative;
+                float:left;
+                width:95vw;
+                height:30vw;
+                padding: 0.5%;
+                background-clip: content-box;
+                vertical-align: center;
+                background-color: #f7d5d3;
+            }
+
+            #section_down {
+                position:relative;
+                float:left;
+                width:95vw;
+                height:70vw;
+                padding: 0.5%;
+                background-clip: content-box;
+                vertical-align: center;
+                background-color: #f7d5d3;
+            }
+
+            .node circle {
+              fill: #DDD;
+              stroke: #777;
+              stroke-width: 0.1em;
+            }
+
+            .node text {
+              font-family: sans-serif;
+              text-anchor: middle;
+              pointer-events: none;
+              user-select: none;
+              -webkit-user-select: none;
+            }
+
+            .link {
+              stroke: #88A;
+              stroke-width: 0.2em;  
+              opacity: 0.5;
+            }  
+            
+
+            #end-arrow {
+              fill: #88A;
+            }
+
+
+          </style>
+
+        <div id="header"></div>
+        <div id="section_up"></div>
+        <div id="section_middle"></div>
+        <div id="section_down"><div id="map" style="width:95vw;height:70vw;"></div></div>
+        <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=x54IxVS84wCIbcS0fTpP&submodules=geocoder"></script>
+        <!--<script src="system/StackedBar/StackedBar.js" charset="utf-8"></script>-->
+        <script>
+        $(document).ready(function () {
+
+            d3.json('graph_GPS_corr.json', (error, graph) => {
+
+
+              const width_head = $("#header").width() 
+              const height_head = $("#header").height()
+              const width_up = $("#section_up").width() 
+              const height_up = $("#section_up").height()
+              const width_middle = $("#section_middle").width() 
+              const height_middle = $("#section_middle").height()
+              const width_down = $("#section_down").width()
+              const height_down = $("#section_down").height()
+
+              const simulation = d3.forceSimulation()
+                .nodes(graph.nodes)
+                .force('link', d3.forceLink().id(d => d.id))
+                .force('charge', d3.forceManyBody().strength([-width_up*0.15]))
+                .force('center', d3.forceCenter(width_up / 2, height_up / 2))
+                .on('tick', ticked);
+
+              simulation.force('link')
+                .links(graph.links)
+                .distance([85]);
+
+              const R = width_up*0.04;
+
+              const svg_head = d3.select("#header").append('svg')
+                .attr('width', width_head)
+                .attr('height', height_head)
+                .append("g")
+                .on("click", Hide_map);
+
+              const svg_up = d3.select("#section_up").append('svg')
+                .attr('width', width_up)
+                .attr('height', height_up);
+
+              const svg_middle = d3.select("#section_middle").append('svg')
+                .attr('width', width_middle)
+                .attr('height', height_middle);
+
+              svg_head.append("text")
+                    .text("성북구 네트워크 시각화")
+                    .attr("class", "svg_head_text")
+                    .attr("x", width_head*0.01)
+                    .attr("y", (height_head/2)+(height_head/8))
+                    .attr("text-anchor", "start")
+                    .attr("font-family", "Roboto Slab")
+                    .attr("font-size", width_head*0.07+"px")
+                    .attr("fill", "#772321")
+                    .style("font-weight", "bold")
+                    .style("cursor", "default")
+
+              svg_head.append("text")
+                    .text("마커리셋")
+                    .attr("class", "svg_head_text")
+                    .attr("x", width_head*0.99)
+                    .attr("y", (height_head/2)+(height_head/8))
+                    .attr("text-anchor", "end")
+                    .attr("font-family", "Roboto Slab")
+                    .attr("font-size", width_head*0.05+"px")
+                    .attr("fill", "#e39291")
+                    .style("cursor", "default")
+                    .style("font-weight", "")
+                    .on("mouseover", function () {
+                            d3.select(this)
+                                    .style("font-weight", "bold")
+                                    .style("cursor", "pointer")
+                                    .attr("fill", "#c34342")
+                    })
+                    .on("mouseout", function () {
+                        d3.select(this)
+                                .style("font-weight", "")
+                                .style("cursor", "default")
+                                .attr("fill", "#e39291")
+                    });
+
+              svg_up.append('svg_up:defs').selectAll('marker')
+                .data([{ id: 'end-arrow', opacity: 0.6 }, { id: 'end-arrow-fade', opacity: 0.1 }])
+                .enter().append('marker')
+                  .attr('id', d => d.id)
+                  .attr('viewBox', '0 0 10 10')
+                  .attr('refX', 2 + R)
+                  .attr('refY', 5)
+                  .attr('markerWidth', 4)
+                  .attr('markerHeight', 4)
+                  .attr('orient', 'auto')
+                  .append('svg_up:path')
+                    .attr('d', 'M0,0 L0,10 L10,5 z')
+                    .style('opacity', d => d.opacity);
+
+              let link = svg_up.selectAll('line')
+                .data(graph.links)
+                .enter().append('line');
+
+              link  
+                .attr('class', 'link')
+                .attr('marker-end', 'url(#end-arrow)')
+                .on('mouseout', fade(1));
+
+              let node = svg_up.selectAll('.node')
+                .data(graph.nodes)
+                .enter().append('g')
+                .attr('class', 'node')
+                .on("click", Show_popup)
+                //.on("click", Show_popup);
+
+              node.append('circle')
+                .attr('r', R)
+                .on('mouseover', fade(0.1))
+                .on('mouseout', fade(1))
+                .call(d3.drag()
+                  .on("start", dragstarted)
+                  .on("drag", dragged)
+                  .on("end", dragended));
+
+              node.append('text')
+                .attr('x', 0)
+                .attr('dy', '.35em')
+                .attr("font-size", width_up*0.03+"px")
+                .text(d => d.name);
+
+              svg_middle.append("image")
+                              .attr("xlink:href", "images/keywords2/4.png")
+                              .attr("class", "svgmiddle_image")
+                              .attr("x", (width_middle * 0.01))
+                              .attr("y", height_middle*0.02)
+                              .attr("width", width_middle*0.98)
+                              .attr("height", height_middle*0.95)
+
+              
+
+              var mapOptions = {
+                  center: new naver.maps.LatLng(37.59487, 126.994710),
+                  zoom: 10
+              };
+
+              var map = new naver.maps.Map('map', mapOptions);
+
+              var markerList = [];
+
+              var marker = new naver.maps.Marker({
+                  position: new naver.maps.LatLng(37.5950130, 126.9948260),
+                  map: map
+              });
+
+              markerList.push(marker);
+
+              function ticked() {
+                link
+                  .attr('x1', d => d.source.x)
+                  .attr('y1', d => d.source.y)
+                  .attr('x2', d => d.target.x)
+                  .attr('y2', d => d.target.y);
+
+                node
+                  .attr('transform', d => `translate(${d.x},${d.y})`);
+              }
+
+              function dragstarted(d) {
+                if (!d3.event.active) simulation.alphaTarget(0.3).restart();
+                d.fx = d.x;
+                d.fy = d.y;
+              }
+
+              function dragged(d) {
+                d.fx = d3.event.x;
+                d.fy = d3.event.y;
+              }
+
+              function dragended(d) {
+                if (!d3.event.active) simulation.alphaTarget(0);
+                d.fx = null;
+                d.fy = null;
+              }
+
+              const linkedByIndex = {};
+              graph.links.forEach(d => {
+                linkedByIndex[`${d.source.index},${d.target.index}`] = 1;
+              });
+
+              function isConnected(a, b) {
+                return linkedByIndex[`${a.index},${b.index}`] || linkedByIndex[`${b.index},${a.index}`] || a.index === b.index;
+              }
+
+              function fade(opacity) {
+                return d => {
+                  node.style('stroke-opacity', function (o) {
+                    const thisOpacity = isConnected(d, o) ? 1 : opacity;
+                    this.setAttribute('fill-opacity', thisOpacity);
+                    return thisOpacity;
+                  });
+
+
+
+                  link.style('stroke-opacity', o => (o.source === d || o.target === d ? 1 : opacity));
+                  link.attr('marker-end', o => (opacity === 1 || o.source === d || o.target === d ? 'url(#end-arrow)' : 'url(#end-arrow-fade)'));
+                };
+              }
+
+              function Show_popup(d) {
+                
+                svg_middle.selectAll(".svgmiddle_image").remove();
+                svg_middle.append("image")
+                              .attr("xlink:href", "images/keywords2/"+d.id+".png")
+                              .attr("class", "svgmiddle_image")
+                              .attr("x", (width_middle * 0.01))
+                              .attr("y", height_middle*0.02)
+                              .attr("width", width_middle*0.98)
+                              .attr("height", height_middle*0.95)
+
+                var Latitude = d.Latitude;
+                var Longitude = d.Longitude;
+
+                var marker = new naver.maps.Marker({
+                    position: new naver.maps.LatLng(Latitude, Longitude),
+                    map: map
+                });
+
+                markerList.push(marker);
+
+              }
+
+              function Hide_map() {
+                    for (var i=0, ii=markerList.length; i<ii; i++) {
+                        markerList[i].setMap(null);
+                    }
+              }
+                    
+                    
+
+            }) 
+            
+        })
+        </script>
+   
+</body>
+</html>
